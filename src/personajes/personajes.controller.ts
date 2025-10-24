@@ -8,13 +8,11 @@ import type { Personaje } from './models/personaje.model';
 export class PersonajesController {
     constructor(private readonly personajesService: PersonajesService) {}
 
-    // POST /elementos
     @Post()
     create(@Body() createPersonajeDto: CreatePersonajeDto): Personaje {
         return this.personajesService.create(createPersonajeDto);
     }
 
-    // GET /elementos?limit={L}&offset={O}
     @Get()
     async findAll(
         @Query('limit', new ParseIntPipe({ optional: true })) limit = 100,
@@ -23,13 +21,11 @@ export class PersonajesController {
         return this.personajesService.findAll(limit, offset);
     }
 
-    // GET /elementos/:id
     @Get(':id')
     async findOne(@Param('id') id: string): Promise<Personaje> {
         return this.personajesService.findOne(id);
     }
 
-    // PATCH /elementos/:id
     @Patch(':id')
     update(
         @Param('id') id: string,
@@ -38,7 +34,6 @@ export class PersonajesController {
         return this.personajesService.update(id, updatePersonajeDto);
     }
 
-    // DELETE /elementos/:id
     @Delete(':id')
     remove(@Param('id') id: string): Personaje {
         return this.personajesService.remove(id);
